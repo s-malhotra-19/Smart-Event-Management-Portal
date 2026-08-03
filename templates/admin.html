@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Admin Panel</h1>
+
+        <h2>Add Event</h2>
+
+        <form action="/add" method="POST">
+
+            <label>Event Name</label><br>
+            <input type="text" name="name"><br><br>
+
+            <label>Date</label><br>
+            <input type="text" name="date"><br><br>
+
+            <label>Location</label><br>
+            <input type="text" name="location"><br><br>
+
+            <button type="submit">Add Event</button>
+
+        </form>
+
+        <hr>
+
+        <h2>Existing Events</h2>
+
+        {% for event in events %}
+
+        <div class="card">
+
+            <h3>{{ event.name }}</h3>
+
+            <p><strong>Date:</strong> {{ event.date }}</p>
+
+            <p><strong>Location:</strong> {{ event.location }}</p>
+
+            <form action="/delete/{{ event.id }}" method="POST">
+                <button type="submit">Delete</button>
+            </form>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</body>
+
+</html>

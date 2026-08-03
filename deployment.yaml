@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: eventportal
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: eventportal
+
+  template:
+    metadata:
+      labels:
+        app: eventportal
+
+    spec:
+      containers:
+      - name: eventportal
+        image: saksham2262/eventportal:v3
+        imagePullPolicy: Always
+
+        ports:
+        - containerPort: 5000
