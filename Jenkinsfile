@@ -34,19 +34,7 @@ pipeline {
             }
         }
 
-        stage('Deploy to Kubernetes') {
-            steps {
-                sh 'kubectl apply -f deployment.yaml'
-                sh 'kubectl apply -f service.yaml'
-            }
-        }
-
-        stage('Verify Deployment') {
-            steps {
-                sh 'kubectl rollout status deployment/eventportal'
-                sh 'kubectl get pods'
-                sh 'kubectl get services'
-            }
+        
         }
 
     }
