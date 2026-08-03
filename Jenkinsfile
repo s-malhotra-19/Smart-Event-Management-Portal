@@ -20,12 +20,6 @@ pipeline {
             }
         }
 
-        stage('Verify Docker Image') {
-            steps {
-                sh 'docker images'
-            }
-        }
-
         stage('Docker Login') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
@@ -34,7 +28,7 @@ pipeline {
             }
         }
 
-        stage('Push Image') {
+        stage('Push Docker Image') {
             steps {
                 sh 'docker push $IMAGE_NAME'
             }
@@ -49,9 +43,11 @@ pipeline {
 
         stage('Verify Deployment') {
             steps {
+                sh 'kubectl rollout status deployment/eventportal'
                 sh 'kubectl get pods'
                 sh 'kubectl get services'
             }
         }
+
     }
 }
