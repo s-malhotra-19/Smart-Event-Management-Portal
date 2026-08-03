@@ -12,13 +12,13 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t saksham2262/eventportal:v3 .'
+                sh 'docker build -t saksham2262/eventportal:v3 .'
             }
         }
 
         stage('Verify Docker Image') {
             steps {
-                bat 'docker images'
+                sh 'docker images'
             }
         }
 
